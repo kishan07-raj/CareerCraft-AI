@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* LaTeX-inspired typography and print styles */
+@layer base {
+  /* Computer Modern font stack for academic look */
+  .font-latex {
+    font-family: "Computer Modern", "Times New Roman", Georgia, Cambria, Times, serif;
+  }
+  
+  /* Small caps styling for section headers */
+  .small-caps {
+    font-variant: small-caps;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  /* Resume container with LaTeX-style margins */
+  .resume-container {
+    @apply max-w-[8.5in] mx-auto bg-white text-black;
+    padding: 0.5in 0.75in;
+  }
+  
+  /* Section header with thin border - LaTeX style */
+  .section-header {
+    @apply text-left text-sm font-semibold border-b border-black pb-1 mb-3 mt-4;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+  }
+  
+  /* Entry item with proper academic spacing */
+  .entry-item {
+    @apply mb-3 text-sm leading-snug;
+  }
+  
+  /* Entry header with title and date */
+  .entry-header {
+    @apply flex justify-between items-baseline mb-1;
+  }
+  
+  /* Entry title (bold) */
+  .entry-title {
+    @apply font-semibold text-sm;
+  }
+  
+  /* Entry subtitle (institution/company) */
+  .entry-subtitle {
+    @apply text-sm italic;
+  }
+  
+  /* Date range styling */
+  .entry-date {
+    @apply text-sm text-gray-700 whitespace-nowrap;
+  }
+  
+  /* Description text */
+  .entry-description {
+    @apply text-sm text-gray-800 mt-1 leading-relaxed;
+  }
+}
+
+/* Print-specific styles */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in 0.75in;
+  }
+  
+  body {
+    @apply bg-white text-black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* Hide UI elements when printing */
+  .no-print {
+    display: none !important;
+  }
+
+  
+  /* Ensure resume takes full width when printing */
+  .resume-container {
+    max-width: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  
+  /* Prevent page breaks inside sections */
+  .section-avoid-break {
+    break-inside: avoid;
+  }
+  
+  /* Force page break before specific sections if needed */
+  .page-break-before {
+    break-before: page;
+  }
+  
+  /* Ensure links show their URL when printed */
+  a[href]:after {
+    content: none !important;
+  }
+  
+  /* Thin borders remain visible */
+  .border-black {
+    border-color: #000 !important;
+  }
+}
+
+/* Screen-specific adjustments */
+@media screen {
+  .resume-container {
+    @apply shadow-lg my-8;
+  }
+}
